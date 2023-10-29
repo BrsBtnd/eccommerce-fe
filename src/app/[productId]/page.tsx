@@ -1,11 +1,6 @@
 import { getProducts } from '@/lib/utils';
 // import { notFound } from 'next/navigation';
 
-/**
- * with background revalidation we can handle if some new data is added in the background,
- * but we cannot handle if the existing data is changed
- * **/
-
 export async function generateStaticParams() {
   /**
    * itt majd csak redux-ot kell hivni es onnan az adatokat.
@@ -15,6 +10,7 @@ export async function generateStaticParams() {
 
   const products = await getProducts();
 
+  // console.log(products);
   /**
    * if no products call notFound()
    * check needed

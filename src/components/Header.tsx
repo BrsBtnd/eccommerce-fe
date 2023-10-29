@@ -37,7 +37,7 @@ export default function Header() {
             <Vercel fillColor="var(--dark-green)" />
           </div>
           <div className="flex items-center">
-            <Favorite className="fill-dark-green" />
+            <Favorite className="!fill-dark-green" />
             <FavoriteBorder className="fill-dark-green" />
             <ShoppingCartCheckout className="fill-dark-green" />
           </div>

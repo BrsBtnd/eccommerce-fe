@@ -3,9 +3,10 @@ import React from 'react';
 import type { Metadata } from 'next';
 import './globals.css';
 import Header from '@/components/Header';
-import { Play } from 'next/font/google';
-
-const tiltNeon = Play({ subsets: ['latin'], weight: '400' });
+import play from '@/typography';
+import { ThemeProvider } from '@mui/material';
+import theme from '@/mui.config';
+import ThemeRegistry from '@/app/ThemeRegistry';
 
 export const metadata: Metadata = {
   title: 'Ecommerce App',
@@ -25,11 +26,13 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body className={tiltNeon.className}>
-        <main>
-          <Header />
-          <section>{children}</section>
-        </main>
+      <body className={play.className}>
+        <ThemeRegistry options={{ key: 'mui' }}>
+          <main>
+            <Header />
+            <section>{children}</section>
+          </main>
+        </ThemeRegistry>
       </body>
     </html>
   );
