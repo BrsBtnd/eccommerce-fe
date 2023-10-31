@@ -8,16 +8,23 @@ interface ProductsCardProps {
   name: string;
   description: string;
   price: number;
+  index?: number;
 }
 export default function ProductsCard({
   name,
   description,
   price,
+  index,
 }: ProductsCardProps) {
   return (
     <Card className="!rounded-2xl !bg-light-silver max-w-xs relative">
       <Image
-        src={faker.image.urlLoremFlickr({ category: 'computers' })}
+        src={faker.image.urlLoremFlickr({
+          category: 'computers',
+          width: 320,
+          height: 200,
+        })}
+        priority={index === 0}
         width={320}
         height={200}
         alt="product"

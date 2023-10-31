@@ -1,16 +1,42 @@
+'use client';
 import ProductsCard from '@/components/ProductCard';
 import { faker } from '@faker-js/faker';
 import { Grid } from '@mui/material';
+import { getProducts } from '@/lib/utils';
+import { useAppDispatch } from '@/app/store/store';
+import {
+  Product,
+  setProducts as setReduxProducts,
+} from '@/app/store/productsSlice';
+import { useEffect, useState } from 'react';
 
 export default function ProductsCards() {
+  const [products, setProducts] = useState<Product[]>([]);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    const getData = async () => {
+      const data = await getProducts();
+      setProducts(data);
+      dispatch(setReduxProducts(data));
+    };
+
+    getData();
+  }, []);
+
   return (
-    <Grid container spacing={3} className="!grid grid-cols-4">
-      {[1, 2, 3, 4, 5, 6].map((item) => (
-        <Grid item key={item}>
+    <Grid
+      container
+      spacing={3}
+      className="!grid lg:grid-cols-2 xl:grid-cols-3 xxl:grid-cols-4"
+    >
+      {products?.map((product: Product, index) => (
+        <Grid item key={product.id} className="flex justify-center">
           <ProductsCard
-            name={faker.commerce.productName()}
-            description={faker.commerce.productDescription()}
-            price={parseFloat(faker.commerce.price())}
+            index={index}
+            name={product.name}
+            description={product.description}
+            price={product.price}
           />
         </Grid>
       ))}

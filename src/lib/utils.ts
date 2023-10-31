@@ -1,5 +1,7 @@
+import { API_URL } from '@/lib/constants';
+
 export async function getProducts() {
-  const response = await fetch('http://localhost:3001/products');
+  const response = await fetch(`${API_URL}/products`);
 
   return await response.json();
 }

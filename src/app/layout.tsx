@@ -4,9 +4,8 @@ import type { Metadata } from 'next';
 import './globals.css';
 import Header from '@/components/Header';
 import play from '@/typography';
-import { ThemeProvider } from '@mui/material';
-import theme from '@/mui.config';
 import ThemeRegistry from '@/app/ThemeRegistry';
+import ReduxProvider from '@/components/ReduxProvider';
 
 export const metadata: Metadata = {
   title: 'Ecommerce App',
@@ -22,8 +21,6 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  console.log('root layout');
-
   return (
     <html lang="en">
       <body className={play.className}>
