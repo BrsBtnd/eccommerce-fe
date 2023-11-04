@@ -1,10 +1,7 @@
 import React from 'react';
-import {
-  Favorite,
-  FavoriteBorder,
-  ShoppingCartCheckout,
-} from '@mui/icons-material';
+import { Favorite, ShoppingCartCheckout } from '@mui/icons-material';
 import Vercel from '@/components/Vercel';
+import { IconButton } from '@mui/material';
 
 export default function Header() {
   /**
@@ -24,10 +21,13 @@ export default function Header() {
           <div className="flex">
             <Vercel fillColor="var(--dark-green)" />
           </div>
-          <div className="flex items-center">
-            <Favorite className="!fill-dark-green" />
-            <FavoriteBorder className="fill-dark-green" />
-            <ShoppingCartCheckout className="fill-dark-green" />
+          <div className="flex items-center gap-1">
+            <IconButton className="!bg-light-silver">
+              <Favorite className="!fill-dark-green" />
+            </IconButton>
+            <IconButton className="!bg-light-silver">
+              <ShoppingCartCheckout className="!fill-dark-green" />
+            </IconButton>
           </div>
         </div>
       </nav>

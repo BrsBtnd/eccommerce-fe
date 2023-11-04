@@ -6,6 +6,8 @@ import {
   Mouse,
   FavoriteBorder,
   ShoppingCart,
+  Favorite,
+  AddShoppingCart,
 } from '@mui/icons-material';
 import { ProductsCardIcons, SideMenuItems } from '@/lib/constants';
 
@@ -17,6 +19,8 @@ const IconMapper = {
   Mouse,
   FavoriteBorder,
   ShoppingCart,
+  Favorite,
+  AddShoppingCart,
 };
 
 interface IconProps {

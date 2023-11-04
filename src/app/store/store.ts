@@ -2,21 +2,11 @@ import { combineReducers } from 'redux';
 import { configureStore } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import productsSlice from '@/app/store/productsSlice';
-// import { persistReducer } from 'redux-persist';
-// import storage from '@/app/store/storage';
-
-// const productsPersistConfig = {
-//   key: productsSlice.name,
-//   storage: storage,
-//   whitelist: ['value'],
-// };
+import sideMenuItemsSlice from '@/app/store/sideMenuItemsSlice';
 
 const rootReducer = combineReducers({
-  // [productsSlice.name]: persistReducer(
-  //   productsPersistConfig,
-  //   productsSlice.reducer,
-  // ),
   [productsSlice.name]: productsSlice.reducer,
+  [sideMenuItemsSlice.name]: sideMenuItemsSlice.reducer,
 });
 
 export const store = configureStore({

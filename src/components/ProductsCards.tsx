@@ -1,28 +1,58 @@
 'use client';
 import ProductsCard from '@/components/ProductCard';
-import { faker } from '@faker-js/faker';
 import { Grid } from '@mui/material';
 import { getProducts } from '@/lib/utils';
-import { useAppDispatch } from '@/app/store/store';
+import { useAppDispatch, useAppSelector } from '@/app/store/store';
 import {
   Product,
-  setProducts as setReduxProducts,
+  selectProducts,
+  setProducts,
 } from '@/app/store/productsSlice';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo } from 'react';
+import { selectSelectedSideMenuItems } from '@/app/store/sideMenuItemsSlice';
+import { faker } from '@faker-js/faker';
 
 export default function ProductsCards() {
-  const [products, setProducts] = useState<Product[]>([]);
   const dispatch = useAppDispatch();
+  const selectedSideMenuItems = useAppSelector(selectSelectedSideMenuItems);
+  const products = useAppSelector(selectProducts);
 
   useEffect(() => {
     const getData = async () => {
       const data = await getProducts();
-      setProducts(data);
-      dispatch(setReduxProducts(data));
+
+      const dataWithImage = data.map((product: Product) => ({
+        ...product,
+        imageSrc: faker.image.urlLoremFlickr({
+          category: 'computers',
+          width: 320,
+          height: 200,
+        }),
+      }));
+
+      dispatch(setProducts(dataWithImage));
     };
 
+    if (products.length > 0) {
+      return;
+    }
+
     getData();
-  }, []);
+  }, [products.length]);
+
+  // console.log('products', products);
+
+  const filteredProducts = useMemo(() => {
+    if (selectedSideMenuItems.length === 0) {
+      return products;
+    }
+
+    return products?.filter((product) =>
+      selectedSideMenuItems.some(
+        (item) => item.toLowerCase() === product.category.toLowerCase(),
+      ),
+    );
+  }, [products, selectedSideMenuItems]);
 
   return (
     <Grid
@@ -30,13 +60,15 @@ export default function ProductsCards() {
       spacing={3}
       className="!grid lg:grid-cols-2 xl:grid-cols-3 xxl:grid-cols-4"
     >
-      {products?.map((product: Product, index) => (
+      {filteredProducts?.map((product: Product, index) => (
         <Grid item key={product.id} className="flex justify-center">
           <ProductsCard
             index={index}
+            id={product.id}
             name={product.name}
             description={product.description}
             price={product.price}
+            imageSrc={product.imageSrc}
           />
         </Grid>
       ))}

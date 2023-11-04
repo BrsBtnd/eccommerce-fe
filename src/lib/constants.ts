@@ -8,7 +8,9 @@ export enum SideMenuItems {
 
 export enum ProductsCardIcons {
   ShoppingCart = 'ShoppingCart',
+  AddShoppingCart = 'AddShoppingCart',
   FavoriteBorder = 'FavoriteBorder',
+  Favorite = 'Favorite',
 }
 
 export const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
