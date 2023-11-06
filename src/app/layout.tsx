@@ -6,6 +6,7 @@ import Header from '@/components/Header';
 import play from '@/typography';
 import ThemeRegistry from '@/app/ThemeRegistry';
 import ReduxProvider from '@/components/ReduxProvider';
+import FavoritesDrawer from '@/components/FavoritesDrawer';
 
 export const metadata: Metadata = {
   title: 'Ecommerce App',
@@ -26,7 +27,10 @@ export default function RootLayout({
       <body className={play.className}>
         <ThemeRegistry options={{ key: 'mui' }}>
           <main>
-            <Header />
+            <ReduxProvider>
+              <Header />
+              <FavoritesDrawer />
+            </ReduxProvider>
             <section>{children}</section>
           </main>
         </ThemeRegistry>

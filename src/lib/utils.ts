@@ -6,6 +6,12 @@ export async function getProducts() {
   return await response.json();
 }
 
+export async function getBasketByUser(id: string) {
+  const response = await fetch(`${API_URL}/carts/${id}`);
+
+  return await response.json();
+}
+
 export function enumToArray<T extends Record<string, string>>(
   enumObj: T,
 ): T[keyof T][] {

@@ -13,4 +13,13 @@ export enum ProductsCardIcons {
   Favorite = 'Favorite',
 }
 
+export enum DrawerIcons {
+  Close = 'Close',
+}
+
+export enum HeaderIcons {
+  Favorite = 'Favorite',
+  ShoppingCartCheckout = 'ShoppingCartCheckout',
+}
+
 export const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';

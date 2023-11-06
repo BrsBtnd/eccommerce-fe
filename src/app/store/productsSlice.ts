@@ -16,10 +16,12 @@ const initialState: {
   products: Product[];
   favorites: string[];
   basket: string[];
+  isFavoritesOpen: boolean;
 } = {
   products: [],
   favorites: [],
   basket: [],
+  isFavoritesOpen: false,
 };
 
 const productsSlice = createSlice({
@@ -34,6 +36,9 @@ const productsSlice = createSlice({
     },
     removeFromFavorites: (state, action: PayloadAction<string>) => {
       state.favorites = state.favorites.filter((id) => id !== action.payload);
+    },
+    toggleFavoritesOpen: (state, action: PayloadAction<boolean>) => {
+      state.isFavoritesOpen = action.payload;
     },
     addToBasket: (state, action: PayloadAction<string[]>) => {
       state.basket = action.payload;
@@ -50,11 +55,21 @@ export const {
   removeFromFavorites,
   addToBasket,
   removeFromBasket,
+  toggleFavoritesOpen,
 } = productsSlice.actions;
 
 export const selectProducts = (state: RootState) => state.products.products;
 
 export const selectFavorites = (state: RootState) => state.products.favorites;
+
+export const selectFavoritesProducts = (state: RootState) => {
+  const favorites = state.products.favorites;
+  const products = state.products.products;
+
+  return products.filter((product) => favorites.includes(product.id));
+};
+export const selectIsFavoritesOpen = (state: RootState) =>
+  state.products.isFavoritesOpen;
 
 export const selectBasket = (state: RootState) => state.products.basket;
 

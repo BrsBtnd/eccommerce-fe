@@ -13,12 +13,14 @@ import {
   selectBasket,
   selectFavorites,
 } from '@/app/store/productsSlice';
-import Link from 'next/link';
 import { useAppDispatch, useAppSelector } from '@/app/store/store';
+import ProductCardContent from '@/components/ProductCardContent';
 
-interface ProductsCardProps extends Omit<Product, 'category' | 'manufacturer'> {
+export interface ProductsCardProps
+  extends Omit<Product, 'category' | 'manufacturer'> {
   index?: number;
 }
+
 export default function ProductsCard({
   name,
   description,
@@ -87,18 +89,12 @@ export default function ProductsCard({
           )}
         </IconButton>
       </div>
-      <CardContent>
-        <h3
-          className="text-dark-green text-lg font-bold mb-4 hover:cursor-pointer"
-          // onClick={handleCardClick}
-        >
-          <Link href={`/${id}`}>{name}</Link>
-        </h3>
-        <p className="text-dark-green text-base overflow-hidden whitespace-nowrap text-ellipsis mb-2">
-          {description}
-        </p>
-        <p className="text-light-green text-base">{price.toFixed(2)}</p>
-      </CardContent>
+      <ProductCardContent
+        name={name}
+        description={description}
+        price={price}
+        id={id}
+      />
     </Card>
   );
 }

@@ -8,8 +8,15 @@ import {
   ShoppingCart,
   Favorite,
   AddShoppingCart,
+  Close,
+  ShoppingCartCheckout,
 } from '@mui/icons-material';
-import { ProductsCardIcons, SideMenuItems } from '@/lib/constants';
+import {
+  DrawerIcons,
+  HeaderIcons,
+  ProductsCardIcons,
+  SideMenuItems,
+} from '@/lib/constants';
 
 const IconMapper = {
   Laptop,
@@ -21,10 +28,12 @@ const IconMapper = {
   ShoppingCart,
   Favorite,
   AddShoppingCart,
+  Close,
+  ShoppingCartCheckout,
 };
 
 interface IconProps {
-  name: SideMenuItems | ProductsCardIcons;
+  name: SideMenuItems | ProductsCardIcons | DrawerIcons | HeaderIcons;
   className?: string;
 }
 

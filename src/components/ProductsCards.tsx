@@ -1,7 +1,7 @@
 'use client';
 import ProductsCard from '@/components/ProductCard';
 import { Grid } from '@mui/material';
-import { getProducts } from '@/lib/utils';
+import { getBasketByUser, getProducts } from '@/lib/utils';
 import { useAppDispatch, useAppSelector } from '@/app/store/store';
 import {
   Product,
@@ -20,6 +20,10 @@ export default function ProductsCards() {
   useEffect(() => {
     const getData = async () => {
       const data = await getProducts();
+
+      const basket = await getBasketByUser('6525422c8ea6b5f7d06af9ab');
+
+      console.log('basket', basket);
 
       const dataWithImage = data.map((product: Product) => ({
         ...product,
