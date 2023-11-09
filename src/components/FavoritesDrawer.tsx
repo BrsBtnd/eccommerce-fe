@@ -10,6 +10,7 @@ import Icon from '@/components/Icon';
 import { DrawerIcons } from '@/lib/constants';
 import FavoritesCard from '@/components/FavoritesCard';
 import ProductCardContent from '@/components/ProductCardContent';
+import BasketSummary from '@/components/BasketSummary';
 
 export default function FavoritesDrawer() {
   const isFavoriteOpen = useAppSelector(selectIsFavoritesOpen);
@@ -43,14 +44,7 @@ export default function FavoritesDrawer() {
               id={product.id}
             />
           ))}
-          <Card className="!rounded-2xl !bg-light-silver max-w-xs w-full mb-4">
-            <CardContent className="!flex !justify-between items-baseline !p-2">
-              <h4 className="text-lg font-medium text-dark-green">Summary:</h4>
-              <span className="font-bold text-light-green">
-                {sumPrice.toFixed(2)}
-              </span>
-            </CardContent>
-          </Card>
+          <BasketSummary sumPrice={sumPrice} />
         </Box>
       </div>
     </Drawer>
