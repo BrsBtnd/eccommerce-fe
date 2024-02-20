@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '@/app/store/store';
 import { SideMenuItems } from '@/lib/constants';
 
@@ -6,10 +6,11 @@ export interface Product {
   id: string;
   name: string;
   description: string;
+
   price: number;
   manufacturer: string;
   category: SideMenuItems;
-  imageSrc?: string;
+  lock?: string;
 }
 
 const initialState: {
@@ -60,14 +61,20 @@ export const {
 
 export const selectProducts = (state: RootState) => state.products.products;
 
+export const selectProductById = createSelector(
+  [selectProducts, (state, productId) => productId],
+  (products, productId) => products.find((product) => product.id === productId),
+);
+
 export const selectFavorites = (state: RootState) => state.products.favorites;
 
-export const selectFavoritesProducts = (state: RootState) => {
-  const favorites = state.products.favorites;
-  const products = state.products.products;
+export const selectFavoritesProducts = createSelector(
+  [selectFavorites, selectProducts],
+  (favorites, products) => {
+    return products.filter((product) => favorites.includes(product.id));
+  },
+);
 
-  return products.filter((product) => favorites.includes(product.id));
-};
 export const selectIsFavoritesOpen = (state: RootState) =>
   state.products.isFavoritesOpen;
 

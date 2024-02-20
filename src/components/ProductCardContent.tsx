@@ -5,7 +5,7 @@ import { toggleFavoritesOpen } from '@/app/store/productsSlice';
 import { useAppDispatch } from '@/app/store/store';
 
 export interface ProductCardContentProps
-  extends Omit<ProductsCardProps, 'index' | 'imageSrc'> {}
+  extends Omit<ProductsCardProps, 'index' | 'lock'> {}
 
 export default function ProductCardContent({
   name,

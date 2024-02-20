@@ -1,7 +1,7 @@
 'use client';
 import ProductsCard from '@/components/ProductCard';
 import { Grid } from '@mui/material';
-import { getBasketByUser, getProducts } from '@/lib/utils';
+import {getBasketByUser, getLock, getProducts} from '@/lib/utils';
 import { useAppDispatch, useAppSelector } from '@/app/store/store';
 import {
   Product,
@@ -11,6 +11,7 @@ import {
 import { useEffect, useMemo } from 'react';
 import { selectSelectedSideMenuItems } from '@/app/store/sideMenuItemsSlice';
 import { faker } from '@faker-js/faker';
+import {lock} from "next/dist/client/components/react-dev-overlay/internal/components/Overlay/body-locker";
 
 export default function ProductsCards() {
   const dispatch = useAppDispatch();
@@ -23,16 +24,14 @@ export default function ProductsCards() {
 
       const basket = await getBasketByUser('6525422c8ea6b5f7d06af9ab');
 
-      console.log('basket', basket);
+      const dataWithImage = data.map((product: Product) => {
+        const lock = getLock()
 
-      const dataWithImage = data.map((product: Product) => ({
-        ...product,
-        imageSrc: faker.image.urlLoremFlickr({
-          category: 'computers',
-          width: 320,
-          height: 200,
-        }),
-      }));
+        return ({
+          ...product,
+          lock
+        })
+      });
 
       dispatch(setProducts(dataWithImage));
     };
@@ -43,8 +42,6 @@ export default function ProductsCards() {
 
     getData();
   }, [products.length]);
-
-  // console.log('products', products);
 
   const filteredProducts = useMemo(() => {
     if (selectedSideMenuItems.length === 0) {
@@ -72,7 +69,7 @@ export default function ProductsCards() {
             name={product.name}
             description={product.description}
             price={product.price}
-            imageSrc={product.imageSrc}
+            lock={product.lock}
           />
         </Grid>
       ))}

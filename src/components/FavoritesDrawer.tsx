@@ -1,5 +1,5 @@
 'use client';
-import { Box, Card, CardContent, Drawer, IconButton } from '@mui/material';
+import { Box, Drawer, IconButton } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '@/app/store/store';
 import {
   selectFavoritesProducts,
@@ -9,7 +9,6 @@ import {
 import Icon from '@/components/Icon';
 import { DrawerIcons } from '@/lib/constants';
 import FavoritesCard from '@/components/FavoritesCard';
-import ProductCardContent from '@/components/ProductCardContent';
 import BasketSummary from '@/components/BasketSummary';
 
 export default function FavoritesDrawer() {
@@ -22,7 +21,6 @@ export default function FavoritesDrawer() {
   };
 
   const sumPrice = favorites.reduce((acc, curr) => acc + curr.price, 0);
-  console.log(favorites);
 
   return (
     <Drawer open={isFavoriteOpen} anchor="right" onClose={handleDrawerClose}>

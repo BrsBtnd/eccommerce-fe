@@ -30,8 +30,8 @@ export default function RootLayout({
             <ReduxProvider>
               <Header />
               <FavoritesDrawer />
+              <section>{children}</section>
             </ReduxProvider>
-            <section>{children}</section>
           </main>
         </ThemeRegistry>
       </body>

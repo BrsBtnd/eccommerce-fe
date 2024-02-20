@@ -1,4 +1,5 @@
-import { API_URL } from '@/lib/constants';
+import { API_URL, LOREM_FLICKR_URL } from '@/lib/constants';
+import {faker} from "@faker-js/faker";
 
 export async function getProducts() {
   const response = await fetch(`${API_URL}/products`);
@@ -18,4 +19,17 @@ export function enumToArray<T extends Record<string, string>>(
   return Object.keys(enumObj).map(
     (key) => enumObj[key as keyof T],
   ) as T[keyof T][];
+}
+
+export function getImageSrc(width: number, height: number, lock: string | undefined): string {
+  return `${LOREM_FLICKR_URL}/${width}/${height}/computers?lock=${lock}`
+}
+
+export function getLock() {
+  const imageUrl = new URL(faker.image.urlLoremFlickr({
+    category: 'computers'
+  }))
+
+  return imageUrl.searchParams.get('lock')
+
 }
