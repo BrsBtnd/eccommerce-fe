@@ -14,6 +14,7 @@ import { DrawerIcons } from '@/lib/constants';
 import FavoritesCard from '@/components/FavoritesCard';
 import BasketSummary from '@/components/BasketSummary';
 import { useBasket } from '@/hooks/useBasket';
+import { getSumPrice } from '@/lib/utils';
 
 export interface Basket {
   id: string;
@@ -30,6 +31,8 @@ export default function BasketDrawer() {
     dispatch(toggleBasketOpen(false));
   };
 
+  const sumPrice = getSumPrice(basket?.products);
+
   return (
     <Drawer open={isBasketOpen} anchor="right" onClose={handleDrawerClose}>
       <div className="w-96">
@@ -39,7 +42,7 @@ export default function BasketDrawer() {
         >
           <Icon name={DrawerIcons.Close} className="!fill-dark-green" />
         </IconButton>
-        <h3 className="text-3xl text-dark-green pt-2 pl-2">Favorites</h3>
+        <h3 className="text-3xl text-dark-green pt-2 pl-2">Basket</h3>
         <Box className="!flex justify-center items-center flex-col mt-8">
           {basket?.products.map((product) => (
             <FavoritesCard
@@ -50,7 +53,7 @@ export default function BasketDrawer() {
               id={product.id}
             />
           ))}
-          {/*<BasketSummary sumPrice={sumPrice} />*/}
+          <BasketSummary sumPrice={sumPrice} />
         </Box>
       </div>
     </Drawer>

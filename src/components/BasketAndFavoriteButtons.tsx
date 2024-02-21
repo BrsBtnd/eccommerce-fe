@@ -1,6 +1,6 @@
 import { IconButton } from '@mui/material';
 import Icon from '@/components/Icon';
-import { ProductsCardIcons } from '@/lib/constants';
+import { API_URL, ProductsCardIcons } from '@/lib/constants';
 import { useAppDispatch, useAppSelector } from '@/app/store/store';
 import {
   addToBasket,
@@ -27,11 +27,24 @@ export default function BasketAndFavoriteButtons({
   const isFavorite = favorites.includes(id);
   const isInBasket = basket?.products.some((product) => product.id === id);
 
-  const handleAddToCart = () => {
+  const handleAddToCart = async () => {
+    // const patch = await fetch(`${API_URL}/carts/${basket?.id}`, {
+    //   method: 'PATCH',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify({
+    //     products: ['64e720002b3b3d651305a23b'],
+    //   }),
+    // });
+
+    // console.log(await patch.json());
+
     if (isInBasket) {
       dispatch(removeFromBasket(id));
       return;
     }
+
     // dispatch(addToBasket([...basket, id]));
   };
 

@@ -10,6 +10,7 @@ import Icon from '@/components/Icon';
 import { DrawerIcons } from '@/lib/constants';
 import FavoritesCard from '@/components/FavoritesCard';
 import BasketSummary from '@/components/BasketSummary';
+import { getSumPrice } from '@/lib/utils';
 
 export default function FavoritesDrawer() {
   const isFavoriteOpen = useAppSelector(selectIsFavoritesOpen);
@@ -20,7 +21,7 @@ export default function FavoritesDrawer() {
     dispatch(toggleFavoritesOpen(false));
   };
 
-  const sumPrice = favorites.reduce((acc, curr) => acc + curr.price, 0);
+  const sumPrice = getSumPrice(favorites);
 
   return (
     <Drawer open={isFavoriteOpen} anchor="right" onClose={handleDrawerClose}>

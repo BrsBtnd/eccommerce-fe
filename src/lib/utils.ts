@@ -1,5 +1,6 @@
 import { API_URL, LOREM_FLICKR_URL } from '@/lib/constants';
 import { faker } from '@faker-js/faker';
+import { Product } from '@/app/store/productsSlice';
 
 export async function getProducts() {
   const response = await fetch(`${API_URL}/products`);
@@ -37,4 +38,8 @@ export function getLock() {
   );
 
   return imageUrl.searchParams.get('lock');
+}
+
+export function getSumPrice(products: Product[] | undefined) {
+  return products?.reduce((acc, curr) => acc + curr.price, 0);
 }

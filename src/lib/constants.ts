@@ -24,4 +24,4 @@ export enum HeaderIcons {
 
 export const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
 
-export const LOREM_FLICKR_URL = 'https://loremflickr.com/'
+export const LOREM_FLICKR_URL = 'https://loremflickr.com/';
