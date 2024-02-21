@@ -3,10 +3,12 @@ import { configureStore } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import productsSlice from '@/app/store/productsSlice';
 import sideMenuItemsSlice from '@/app/store/sideMenuItemsSlice';
+import userSlice from '@/app/store/userSlice';
 
 const rootReducer = combineReducers({
   [productsSlice.name]: productsSlice.reducer,
   [sideMenuItemsSlice.name]: sideMenuItemsSlice.reducer,
+  [userSlice.name]: userSlice.reducer,
 });
 
 export const store = configureStore({

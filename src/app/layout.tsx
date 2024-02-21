@@ -7,6 +7,7 @@ import play from '@/typography';
 import ThemeRegistry from '@/app/ThemeRegistry';
 import ReduxProvider from '@/components/ReduxProvider';
 import FavoritesDrawer from '@/components/FavoritesDrawer';
+import BasketDrawer from '@/components/BasketDrawer';
 
 export const metadata: Metadata = {
   title: 'Ecommerce App',
@@ -30,6 +31,7 @@ export default function RootLayout({
             <ReduxProvider>
               <Header />
               <FavoritesDrawer />
+              <BasketDrawer />
               <section>{children}</section>
             </ReduxProvider>
           </main>

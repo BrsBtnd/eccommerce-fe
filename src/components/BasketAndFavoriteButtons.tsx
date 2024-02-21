@@ -10,6 +10,7 @@ import {
   selectBasket,
   selectFavorites,
 } from '@/app/store/productsSlice';
+import { useBasket } from '@/hooks/useBasket';
 
 export interface BasketAndFavoriteButtonsProps {
   id: string;
@@ -22,16 +23,16 @@ export default function BasketAndFavoriteButtons({
 }: BasketAndFavoriteButtonsProps) {
   const dispatch = useAppDispatch();
   const favorites = useAppSelector(selectFavorites);
-  const basket = useAppSelector(selectBasket);
+  const { basket } = useBasket();
   const isFavorite = favorites.includes(id);
-  const isInBasket = basket.includes(id);
+  const isInBasket = basket?.products.some((product) => product.id === id);
 
   const handleAddToCart = () => {
     if (isInBasket) {
       dispatch(removeFromBasket(id));
       return;
     }
-    dispatch(addToBasket([...basket, id]));
+    // dispatch(addToBasket([...basket, id]));
   };
 
   const handleAddToFavorites = () => {

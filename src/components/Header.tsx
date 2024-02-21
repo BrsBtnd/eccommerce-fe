@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from '@/app/store/store';
 import {
   selectIsFavoritesOpen,
   toggleFavoritesOpen,
+  toggleBasketOpen,
 } from '@/app/store/productsSlice';
 import Icon from '@/components/Icon';
 import { HeaderIcons } from '@/lib/constants';
@@ -23,7 +24,9 @@ export default function Header() {
 **/
   const dispatch = useAppDispatch();
   const isFavoriteOpen = useAppSelector(selectIsFavoritesOpen);
-  const handleCartCheckout = () => {};
+  const handleCartCheckout = () => {
+    dispatch(toggleBasketOpen(true));
+  };
   const handleFavorite = () => {
     dispatch(toggleFavoritesOpen(true));
   };
@@ -38,7 +41,10 @@ export default function Header() {
             </Link>
           </div>
           <div className="flex items-center gap-1">
-            <IconButton className="!bg-light-silver">
+            <IconButton
+              className="!bg-light-silver"
+              onClick={handleCartCheckout}
+            >
               <Icon
                 name={HeaderIcons.ShoppingCartCheckout}
                 className="!fill-dark-green"
